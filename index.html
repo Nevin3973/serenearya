@@ -1,0 +1,1214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Serene Arya Senior Living — Grand Inauguration</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Cinzel:wght@300;400;500&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+/* ── TOKENS ─────────────────────────────────── */
+:root {
+  --green:        #2d4a2a;
+  --green-mid:    #3d6438;
+  --green-soft:   #4e7a48;
+  --green-pale:   #c6d9c2;
+  --gold:         #c9a046;
+  --gold-light:   #dbb95a;
+  --gold-bright:  #f0cd7a;
+  --gold-pale:    #f6edd8;
+  --gold-muted:   #e8d5a8;
+  --cream:        #faf8f2;
+  --parchment:    #f4ede0;
+  --linen:        #ede6d6;
+  --bark:         #1a1710;
+  --text-dark:    #1e1c16;
+  --text-mid:     #52493a;
+  --text-light:   #8a7e6c;
+  --white:        #ffffff;
+
+  --r-sm: 12px;
+  --r-md: 20px;
+  --r-lg: 28px;
+  --shadow-sm: 0 2px 12px rgba(45,74,42,.08);
+  --shadow-md: 0 8px 32px rgba(45,74,42,.12);
+  --shadow-lg: 0 20px 56px rgba(45,74,42,.18);
+}
+
+/* ── RESET ──────────────────────────────────── */
+*, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+html { scroll-behavior:smooth; }
+body {
+  font-family:'Jost', sans-serif;
+  background:var(--cream);
+  color:var(--text-dark);
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+img { display:block; max-width:100%; }
+a { text-decoration:none; color:inherit; }
+
+/* ── INTRO SCREEN ──────────────────────────── */
+#intro {
+  position:fixed; inset:0; z-index:9999;
+  background:var(--bark);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  overflow:hidden;
+}
+#intro.fade-out {
+  animation:intro-exit 1.4s cubic-bezier(.77,0,.18,1) forwards;
+  pointer-events:none;
+}
+@keyframes intro-exit {
+  0%   { opacity:1; transform:scale(1); }
+  100% { opacity:0; transform:scale(1.04); visibility:hidden; }
+}
+#bloom-canvas { position:absolute; inset:0; pointer-events:none; }
+
+.i-leaf {
+  position:absolute; pointer-events:none;
+  animation:leaf-sway 9s ease-in-out infinite;
+}
+@keyframes leaf-sway {
+  0%,100% { transform:var(--base-rot,rotate(0deg)) translateY(0); }
+  50%      { transform:var(--base-rot,rotate(0deg)) translateY(-16px); }
+}
+
+.intro-content {
+  position:relative; z-index:2;
+  display:flex; flex-direction:column;
+  align-items:center; text-align:center;
+  padding:0 1.5rem;
+}
+
+.i-rule {
+  width:0; height:1px;
+  background:linear-gradient(to right, transparent, var(--gold), transparent);
+  margin-bottom:2rem;
+  animation:rule-grow 1.1s ease .3s forwards;
+}
+@keyframes rule-grow { to { width:min(240px,55vw); } }
+
+.i-brand-serene {
+  font-family:'Cinzel', serif; font-weight:300;
+  font-size:clamp(2.6rem,10vw,6rem);
+  letter-spacing:.22em; line-height:1;
+  color:transparent;
+  background:linear-gradient(170deg,#fff 0%,rgba(255,255,255,.45) 100%);
+  -webkit-background-clip:text; background-clip:text;
+  clip-path:inset(0 100% 0 0);
+  animation:wipe 1.5s cubic-bezier(.77,0,.18,1) .6s forwards;
+}
+.i-brand-arya {
+  font-family:'Cinzel', serif; font-weight:500;
+  font-size:clamp(2.6rem,10vw,6rem);
+  letter-spacing:.22em; line-height:1;
+  color:transparent;
+  background:linear-gradient(170deg,var(--gold-bright) 0%,var(--gold) 100%);
+  -webkit-background-clip:text; background-clip:text;
+  clip-path:inset(0 100% 0 0);
+  animation:wipe 1.5s cubic-bezier(.77,0,.18,1) 1.1s forwards;
+}
+@keyframes wipe { to { clip-path:inset(0 0% 0 0); } }
+
+.i-tagline {
+  font-size:clamp(.52rem,1.5vw,.72rem);
+  letter-spacing:.55em; text-transform:uppercase; font-weight:300;
+  color:rgba(230,210,165,.5); margin-top:.7rem;
+  opacity:0; animation:fadeUp .9s ease 1.9s forwards;
+}
+.i-rule-b {
+  width:0; height:1px;
+  background:linear-gradient(to right, transparent, var(--gold), transparent);
+  margin-top:1.8rem;
+  animation:rule-grow 1.1s ease 1.7s forwards;
+}
+
+.countdown-wrap {
+  margin-top:2.8rem; opacity:0;
+  animation:fadeUp .9s ease 2.3s forwards;
+  display:flex; flex-direction:column; align-items:center; gap:.85rem;
+}
+.c-label {
+  font-size:.56rem; letter-spacing:.42em; text-transform:uppercase; font-weight:300;
+  color:rgba(255,255,255,.26);
+}
+.c-units { display:flex; gap:1.6rem; align-items:flex-end; }
+.c-unit  { display:flex; flex-direction:column; align-items:center; gap:.25rem; }
+.c-num   {
+  font-family:'Cormorant Garamond', serif;
+  font-size:clamp(2rem,6vw,3.4rem); font-weight:300;
+  color:#fff; line-height:1; min-width:2ch; text-align:center;
+}
+.c-ulabel {
+  font-size:.48rem; letter-spacing:.28em; text-transform:uppercase; font-weight:300;
+  color:rgba(255,255,255,.26);
+}
+.c-dot {
+  font-family:'Cormorant Garamond', serif;
+  font-size:clamp(1.2rem,4vw,2rem);
+  color:rgba(201,160,70,.4); line-height:1; padding-bottom:.2rem;
+}
+.c-live {
+  display:none; font-family:'Cinzel', serif;
+  font-size:clamp(.68rem,2vw,.88rem); letter-spacing:.28em;
+  color:var(--gold-light);
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.35;} }
+
+.enter-btn {
+  display:none; margin-top:1.4rem;
+  font-size:.62rem; letter-spacing:.32em; text-transform:uppercase; font-weight:300;
+  color:var(--gold-light); cursor:pointer; background:transparent;
+  border:1px solid rgba(201,160,70,.42);
+  padding:.6rem 2rem; border-radius:50px;
+  transition:background .3s, color .3s, border-color .3s;
+}
+.enter-btn:hover { background:var(--gold); color:var(--bark); border-color:var(--gold); }
+
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(14px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+.reveal-layer {
+  position:fixed; inset:0; z-index:9000;
+  background:var(--green);
+  transform:scaleY(1); transform-origin:top;
+  transition:transform 1.4s cubic-bezier(.86,0,.07,1);
+  pointer-events:none;
+}
+.reveal-layer.open { transform:scaleY(0); }
+
+/* ── NAV ────────────────────────────────────── */
+.nav {
+  position:fixed; top:0; left:0; right:0; z-index:800;
+  padding:.9rem 1.4rem;
+  display:flex; align-items:center; justify-content:space-between;
+  transition:background .4s, box-shadow .4s, padding .4s;
+}
+.nav.scrolled {
+  background:rgba(26,23,16,.92);
+  backdrop-filter:blur(14px);
+  box-shadow:0 1px 0 rgba(201,160,70,.15);
+  padding:.65rem 1.4rem;
+}
+.nav-logo {
+  display:flex; align-items:center; gap:.7rem;
+}
+.nav-logo img {
+  height:36px; width:auto;
+  filter:brightness(0) invert(1) sepia(1) saturate(1.5) hue-rotate(10deg) brightness(1.15);
+}
+.nav-brand {
+  font-family:'Cinzel', serif; font-weight:400; font-size:.7rem;
+  letter-spacing:.2em; color:#fff; text-transform:uppercase;
+  line-height:1.3;
+}
+.nav-brand span { display:block; font-size:.46rem; letter-spacing:.38em; color:var(--gold-light); font-weight:300; margin-top:.15rem; }
+
+.nav-links {
+  display:none;
+  list-style:none; gap:2rem; align-items:center;
+}
+.nav-links a {
+  font-size:.58rem; letter-spacing:.28em; text-transform:uppercase; font-weight:400;
+  color:rgba(255,255,255,.6); transition:color .2s;
+}
+.nav-links a:hover { color:var(--gold-light); }
+
+.nav-cta {
+  font-size:.56rem; letter-spacing:.22em; text-transform:uppercase; font-weight:400;
+  color:var(--gold-light); border:1px solid rgba(201,160,70,.45);
+  padding:.4rem 1.1rem; border-radius:50px;
+  transition:background .25s, color .25s;
+}
+.nav-cta:hover { background:var(--gold); color:var(--bark); }
+
+@media(min-width:768px) {
+  .nav-links { display:flex; }
+  .nav { padding:1.1rem 3rem; }
+  .nav.scrolled { padding:.75rem 3rem; }
+  .nav-logo img { height:42px; }
+  .nav-brand { font-size:.78rem; }
+}
+
+/* ── HERO ───────────────────────────────────── */
+.hero {
+  min-height:100svh;
+  background:linear-gradient(160deg, var(--green) 0%, var(--green-mid) 50%, #162814 100%);
+  display:flex; flex-direction:column;
+  align-items:center; justify-content:center;
+  position:relative; overflow:hidden;
+  padding:7rem 1.5rem 5rem;
+  text-align:center;
+}
+.hero-bg-img {
+  position:absolute; inset:0;
+  background:url('https://images.unsplash.com/photo-1581578731548-c64695cc6952?w=1400&auto=format&fit=crop&q=70') center/cover no-repeat;
+  opacity:.13;
+  pointer-events:none;
+}
+.hero-vignette {
+  position:absolute; inset:0;
+  background:radial-gradient(ellipse at center, transparent 30%, rgba(22,40,20,.7) 100%);
+  pointer-events:none;
+}
+
+.hero-ring {
+  position:absolute; border-radius:50%;
+  border:1px solid rgba(201,160,70,.07);
+  top:50%; left:50%; transform:translate(-50%,-50%);
+  pointer-events:none;
+}
+.hero-ring:nth-child(1) { width:90vmax; height:90vmax; }
+.hero-ring:nth-child(2) { width:62vmax; height:62vmax; border-color:rgba(201,160,70,.04); }
+
+.hero-inner { position:relative; z-index:1; max-width:600px; width:100%; }
+
+.hero-badge {
+  display:inline-flex; align-items:center; gap:.6rem;
+  font-size:.56rem; letter-spacing:.36em; text-transform:uppercase; font-weight:400;
+  color:var(--gold-light); border:1px solid rgba(201,160,70,.35);
+  padding:.38rem 1.4rem; border-radius:50px;
+  margin-bottom:2.2rem;
+  animation:fadeUp .9s ease .2s both;
+}
+.hero-badge::before, .hero-badge::after { content:'✦'; font-size:.4rem; }
+
+.logo-wrap {
+  animation:fadeUp 1s ease .4s both;
+  margin-bottom:1.6rem;
+}
+.logo-wrap img {
+  width:min(160px,38vw); margin:0 auto;
+  filter:brightness(0) invert(1) sepia(1) saturate(1.4) hue-rotate(10deg) brightness(1.1);
+}
+
+.hero-title {
+  font-family:'Cinzel', serif; font-weight:500;
+  font-size:clamp(2.2rem,9vw,5rem);
+  color:#fff; line-height:1.05; letter-spacing:.05em;
+  animation:fadeUp 1s ease .55s both;
+}
+.hero-title em { color:var(--gold-light); font-style:normal; }
+.hero-sub {
+  font-family:'Cinzel', serif; font-weight:300;
+  font-size:clamp(.54rem,1.8vw,.72rem);
+  letter-spacing:.52em; text-transform:uppercase;
+  color:rgba(198,217,194,.65);
+  margin-top:.4rem;
+  animation:fadeUp 1s ease .7s both;
+}
+
+.gold-rule {
+  display:flex; align-items:center; gap:1rem;
+  margin:2rem auto; width:min(260px,70vw);
+  animation:fadeUp 1s ease .85s both;
+}
+.gold-rule::before, .gold-rule::after {
+  content:''; flex:1; height:1px;
+  background:linear-gradient(to right, transparent, rgba(201,160,70,.55));
+}
+.gold-rule::after { background:linear-gradient(to left, transparent, rgba(201,160,70,.55)); }
+.gold-rule-icon { color:var(--gold-light); font-size:.9rem; }
+
+.event-card {
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(201,160,70,.28);
+  border-radius:var(--r-md); padding:1.6rem 1.8rem;
+  backdrop-filter:blur(16px);
+  animation:fadeUp 1s ease 1s both;
+}
+.event-pill {
+  font-size:.52rem; letter-spacing:.34em; text-transform:uppercase; font-weight:400;
+  color:var(--gold-light); margin-bottom:.55rem;
+}
+.event-date {
+  font-family:'Cormorant Garamond', serif;
+  font-size:clamp(1.3rem,4.5vw,1.9rem); font-weight:400;
+  color:#fff; line-height:1.2;
+}
+.event-date strong { color:var(--gold-light); font-weight:500; }
+.event-time {
+  margin-top:.4rem; font-size:.72rem; font-weight:200;
+  color:rgba(198,217,194,.58); letter-spacing:.16em;
+}
+.event-divider {
+  height:1px; background:rgba(201,160,70,.15);
+  margin:.9rem 0;
+}
+.event-address {
+  font-size:.68rem; font-weight:300;
+  color:rgba(255,255,255,.36); letter-spacing:.04em; line-height:1.95;
+}
+
+.scroll-hint {
+  position:absolute; bottom:1.8rem; left:50%; transform:translateX(-50%);
+  display:flex; flex-direction:column; align-items:center; gap:.35rem;
+  opacity:.32; z-index:1;
+  animation:fadeUp 1s ease 1.6s both;
+}
+.scroll-hint span {
+  font-size:.5rem; letter-spacing:.3em; text-transform:uppercase;
+  color:rgba(198,217,194,.8);
+}
+.scroll-line {
+  width:1px; height:26px;
+  background:linear-gradient(to bottom, var(--gold-light), transparent);
+  animation:drip 2.2s ease-in-out infinite;
+}
+@keyframes drip {
+  0%   { transform:scaleY(0); transform-origin:top; opacity:0; }
+  40%  { transform:scaleY(1); transform-origin:top; opacity:1; }
+  80%  { transform:scaleY(1); transform-origin:bottom; opacity:0; }
+  100% { transform:scaleY(0); transform-origin:bottom; opacity:0; }
+}
+
+@media(min-width:768px) {
+  .hero { padding:8rem 3rem 6rem; }
+  .logo-wrap img { width:min(200px,24vw); }
+  .event-card { padding:2rem 2.8rem; }
+}
+
+/* ── WELCOME ────────────────────────────────── */
+.welcome {
+  background:var(--cream); padding:5rem 1.5rem;
+  position:relative; overflow:hidden;
+}
+.welcome-inner {
+  max-width:700px; margin:0 auto;
+  text-align:center; position:relative; z-index:1;
+}
+.section-eyebrow {
+  display:block; font-size:.56rem; letter-spacing:.42em;
+  text-transform:uppercase; font-weight:500;
+  color:var(--gold); margin-bottom:.9rem;
+}
+.section-title {
+  font-family:'Cormorant Garamond', serif;
+  font-size:clamp(1.7rem,5.5vw,2.9rem); font-weight:400;
+  font-style:italic; color:var(--green); line-height:1.32;
+  margin-bottom:1.6rem;
+}
+.welcome-body {
+  font-size:clamp(.9rem,2.5vw,1.05rem); font-weight:300;
+  color:var(--text-mid); line-height:2;
+  max-width:580px; margin:0 auto;
+}
+.welcome-sig {
+  margin-top:2.2rem;
+  font-family:'Cormorant Garamond', serif;
+  font-style:italic; font-size:1rem; color:var(--green-soft);
+}
+.welcome-sig strong {
+  display:block; font-style:normal;
+  font-family:'Jost', sans-serif; font-size:.6rem;
+  letter-spacing:.28em; text-transform:uppercase;
+  color:var(--gold); font-weight:500; margin-top:.25rem;
+}
+.corner-leaf {
+  position:absolute; pointer-events:none; opacity:.06;
+}
+.corner-leaf.tl { top:-40px; left:-40px; width:280px; transform:rotate(-20deg); }
+.corner-leaf.br { bottom:-40px; right:-40px; width:250px; transform:rotate(160deg); }
+
+@media(min-width:768px) {
+  .welcome { padding:7rem 2rem; }
+}
+
+/* ── STORY SECTIONS ─────────────────────────── */
+.story {
+  display:grid; grid-template-columns:1fr;
+  position:relative; overflow:hidden;
+}
+.story-img {
+  position:relative; overflow:hidden;
+  height:260px;
+}
+.story-img img {
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .8s ease;
+}
+.story:hover .story-img img { transform:scale(1.04); }
+.story-img::after {
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(to bottom, transparent 50%, rgba(45,74,42,.35));
+}
+.story-body {
+  padding:2.8rem 1.5rem;
+  display:flex; flex-direction:column; justify-content:center;
+  position:relative; overflow:hidden;
+  background:var(--linen);
+}
+.story-body.dark { background:var(--green); }
+.story-body.gold-bg { background:var(--gold-pale); }
+
+.story-num {
+  font-family:'Cinzel', serif; font-size:3.5rem; font-weight:300;
+  color:var(--gold); opacity:.18; line-height:1;
+  margin-bottom:-.4rem;
+}
+.story-body.dark .story-num { color:rgba(198,217,194,.3); opacity:1; }
+.story-tag {
+  display:inline-block; font-size:.54rem; letter-spacing:.38em;
+  text-transform:uppercase; font-weight:500; color:var(--gold);
+  margin-bottom:1rem;
+}
+.story-body.dark .story-tag { color:rgba(201,160,70,.65); }
+.story-body h3 {
+  font-family:'Cormorant Garamond', serif;
+  font-size:clamp(1.35rem,3.5vw,1.9rem); font-weight:400;
+  color:var(--green); line-height:1.28; margin-bottom:1rem;
+}
+.story-body.dark h3 { color:#fff; }
+.story-body.gold-bg h3 { color:var(--green); }
+.story-body p {
+  font-size:clamp(.86rem,2vw,.97rem); font-weight:300;
+  color:var(--text-mid); line-height:2;
+}
+.story-body.dark p { color:rgba(198,217,194,.72); }
+.story-deco-leaf {
+  position:absolute; bottom:-30px; right:-30px; width:160px;
+  opacity:.07; pointer-events:none; transform:rotate(25deg);
+}
+
+@media(min-width:768px) {
+  .story { grid-template-columns:1fr 1fr; }
+  .story.flip { direction:rtl; }
+  .story.flip > * { direction:ltr; }
+  .story-img { height:auto; min-height:440px; }
+  .story-img::after {
+    background:linear-gradient(to right, rgba(45,74,42,.25), transparent);
+  }
+  .story.flip .story-img::after {
+    background:linear-gradient(to left, rgba(45,74,42,.25), transparent);
+  }
+  .story-body { padding:4rem 4.5rem; }
+}
+
+/* ── GALLERY STRIP ──────────────────────────── */
+.gallery-strip {
+  display:grid; grid-template-columns:1fr 1fr;
+  height:220px;
+}
+.gal-cell { overflow:hidden; position:relative; }
+.gal-cell img {
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .65s ease;
+}
+.gal-cell:hover img { transform:scale(1.07); }
+.gal-cell::after {
+  content:''; position:absolute; inset:0;
+  background:rgba(45,74,42,.2);
+  transition:background .4s;
+}
+.gal-cell:hover::after { background:rgba(45,74,42,.04); }
+
+@media(min-width:600px) {
+  .gallery-strip { grid-template-columns:repeat(4,1fr); height:300px; }
+}
+@media(min-width:1024px) {
+  .gallery-strip { height:360px; }
+}
+
+/* ── OFFERINGS ──────────────────────────────── */
+.offerings {
+  background:var(--cream); padding:5rem 1.5rem;
+  text-align:center; position:relative; overflow:hidden;
+}
+.offer-grid {
+  display:grid; grid-template-columns:1fr;
+  gap:1.4rem; max-width:1080px; margin:2.8rem auto 0;
+}
+.offer-card {
+  background:var(--white); border-radius:var(--r-md);
+  overflow:hidden; text-align:left;
+  border:1px solid rgba(45,74,42,.07);
+  box-shadow:var(--shadow-sm);
+  transition:transform .35s, box-shadow .35s;
+}
+.offer-card:hover { transform:translateY(-6px); box-shadow:var(--shadow-lg); }
+.offer-img-wrap { height:180px; overflow:hidden; position:relative; }
+.offer-img-wrap img {
+  width:100%; height:100%; object-fit:cover;
+  transition:transform .6s ease;
+}
+.offer-card:hover .offer-img-wrap img { transform:scale(1.06); }
+.offer-img-overlay {
+  position:absolute; inset:0;
+  background:linear-gradient(to bottom, transparent 45%, rgba(45,74,42,.42));
+}
+.offer-body { padding:1.4rem 1.4rem 1.8rem; }
+.offer-icon {
+  width:38px; height:38px; border-radius:50%;
+  background:var(--gold-pale); margin-bottom:.9rem;
+  display:flex; align-items:center; justify-content:center;
+  border:1px solid rgba(201,160,70,.25);
+}
+.offer-icon svg { width:18px; height:18px; }
+.offer-card h3 {
+  font-family:'Cinzel', serif; font-size:.72rem; letter-spacing:.1em;
+  color:var(--green); margin-bottom:.55rem;
+}
+.offer-card p {
+  font-size:.83rem; font-weight:300;
+  color:var(--text-mid); line-height:1.88;
+}
+
+@media(min-width:600px) {
+  .offer-grid { grid-template-columns:1fr 1fr; }
+}
+@media(min-width:900px) {
+  .offer-grid { grid-template-columns:repeat(3,1fr); }
+  .offerings { padding:7rem 2rem; }
+}
+
+/* ── PILLARS ────────────────────────────────── */
+.pillars {
+  background:var(--green); padding:5rem 1.5rem;
+  text-align:center; position:relative; overflow:hidden;
+}
+.pillars::before {
+  content:''; position:absolute; inset:0; pointer-events:none;
+  background:url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M50 8C50 8 88 36 88 52C88 72 50 92 50 92C50 92 12 72 12 52C12 36 50 8 50 8Z' fill='%23c9a046' fill-opacity='0.018'/%3E%3C/svg%3E");
+}
+.pillars .section-eyebrow { color:rgba(201,160,70,.7); }
+.pillars .section-title { color:#fff; }
+.pillars-sub {
+  font-size:.8rem; font-weight:300;
+  color:rgba(198,217,194,.48); max-width:500px;
+  margin:.5rem auto 3rem; letter-spacing:.06em; line-height:1.8;
+}
+.pillar-grid {
+  display:grid; grid-template-columns:1fr;
+  gap:1.2rem; max-width:960px; margin:0 auto;
+}
+.pillar-card {
+  background:rgba(255,255,255,.05); border-radius:var(--r-md);
+  border:1px solid rgba(198,217,194,.1);
+  padding:2rem 1.6rem; text-align:left;
+  transition:background .35s, border-color .35s;
+  position:relative; overflow:hidden;
+}
+.pillar-card:hover {
+  background:rgba(255,255,255,.08);
+  border-color:rgba(201,160,70,.35);
+}
+.pillar-num {
+  font-family:'Cinzel', serif; font-size:2rem; font-weight:300;
+  color:rgba(201,160,70,.2); line-height:1; margin-bottom:.9rem;
+}
+.pillar-card h3 {
+  font-family:'Cinzel', serif; font-size:.78rem; letter-spacing:.16em;
+  color:#fff; margin-bottom:.65rem;
+}
+.pillar-card p {
+  font-size:.83rem; font-weight:300;
+  color:rgba(198,217,194,.6); line-height:1.9;
+}
+
+@media(min-width:600px) {
+  .pillar-grid { grid-template-columns:1fr 1fr; }
+}
+@media(min-width:900px) {
+  .pillar-grid { grid-template-columns:repeat(4,1fr); }
+  .pillars { padding:7rem 2rem; }
+}
+
+/* ── QUOTE BAND ─────────────────────────────── */
+.quote-band {
+  background:var(--parchment); padding:5rem 1.5rem;
+  text-align:center; position:relative; overflow:hidden;
+}
+.quote-mark {
+  font-family:'Cormorant Garamond', serif; font-size:5rem;
+  font-weight:300; color:var(--gold); opacity:.22;
+  line-height:.5; margin-bottom:.9rem;
+}
+.quote-text {
+  font-family:'Cormorant Garamond', serif;
+  font-size:clamp(1.2rem,3.8vw,1.9rem); font-style:italic; font-weight:400;
+  color:var(--green); max-width:720px; line-height:1.7;
+  margin:0 auto; position:relative; z-index:1;
+}
+.quote-attr {
+  margin-top:1.8rem; font-size:.62rem; letter-spacing:.32em;
+  text-transform:uppercase; font-weight:400; color:var(--gold);
+  position:relative; z-index:1;
+}
+
+@media(min-width:768px) {
+  .quote-band { padding:7rem 2rem; }
+}
+
+/* ── CONTACT ────────────────────────────────── */
+.contact {
+  background:linear-gradient(145deg, var(--green) 0%, #132512 100%);
+  padding:4rem 1.5rem; text-align:center; position:relative; overflow:hidden;
+}
+.contact h3 {
+  font-family:'Cinzel', serif; font-size:clamp(.9rem,3.5vw,1.3rem);
+  color:#fff; letter-spacing:.12em; margin-bottom:.8rem;
+  position:relative; z-index:1;
+}
+.contact p {
+  font-size:.78rem; font-weight:300;
+  color:rgba(198,217,194,.42); line-height:2.1; letter-spacing:.05em;
+  position:relative; z-index:1;
+}
+.contact strong { color:var(--gold-light); }
+.map-btn {
+  display:inline-block; margin-top:1.4rem;
+  font-size:.6rem; letter-spacing:.26em; text-transform:uppercase; font-weight:400;
+  color:var(--gold-light); border:1px solid rgba(201,160,70,.4);
+  padding:.52rem 1.5rem; border-radius:50px;
+  transition:background .3s, color .3s;
+  position:relative; z-index:1;
+}
+.map-btn:hover { background:var(--gold); color:var(--bark); border-color:var(--gold); }
+
+.contact-divider {
+  height:1px; background:rgba(201,160,70,.12);
+  max-width:340px; margin:2rem auto;
+}
+.contact-phones {
+  display:flex; flex-wrap:wrap; justify-content:center; gap:.6rem 2rem;
+  font-size:.72rem; font-weight:300; color:var(--gold-light); letter-spacing:.08em;
+  position:relative; z-index:1;
+}
+.contact-phones span::before { content:'☎ '; opacity:.55; }
+
+@media(min-width:768px) {
+  .contact { padding:6rem 2rem; }
+}
+
+/* ── FOOTER ─────────────────────────────────── */
+footer {
+  background:var(--bark); padding:2.2rem 1.5rem; text-align:center;
+  color:rgba(255,255,255,.2); font-size:.64rem; letter-spacing:.08em;
+  line-height:2.1; font-weight:300;
+}
+footer strong { color:var(--gold-light); font-weight:400; }
+footer .f-rule {
+  height:1px; max-width:200px; margin:.8rem auto;
+  background:rgba(201,160,70,.15);
+}
+
+/* ── SCROLL REVEAL ──────────────────────────── */
+.reveal {
+  opacity:0; transform:translateY(28px);
+  transition:opacity .75s ease, transform .75s ease;
+}
+.reveal.in { opacity:1; transform:translateY(0); }
+.reveal-delay-1 { transition-delay:.1s; }
+.reveal-delay-2 { transition-delay:.2s; }
+.reveal-delay-3 { transition-delay:.3s; }
+
+/* ── PARTICLES ──────────────────────────────── */
+#particles { position:fixed; inset:0; pointer-events:none; z-index:1; }
+.particle {
+  position:absolute; border-radius:50%;
+  animation:float-up linear infinite;
+}
+@keyframes float-up {
+  0%   { transform:translateY(100vh) rotate(0deg); opacity:0; }
+  8%   { opacity:1; }
+  92%  { opacity:.35; }
+  100% { transform:translateY(-10vh) rotate(720deg); opacity:0; }
+}
+</style>
+</head>
+<body>
+
+<!-- LEAF SVG SYMBOLS -->
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <symbol id="leaf" viewBox="0 0 200 340">
+    <path d="M100 10C100 10 182 80 182 170C182 268 100 330 100 330C100 330 18 268 18 170C18 80 100 10 100 10Z" fill="currentColor"/>
+    <line x1="100" y1="28" x2="100" y2="322" stroke="white" stroke-width="2" opacity=".32"/>
+    <line x1="100" y1="95"  x2="152" y2="142" stroke="white" stroke-width="1.3" opacity=".25"/>
+    <line x1="100" y1="138" x2="158" y2="178" stroke="white" stroke-width="1.3" opacity=".25"/>
+    <line x1="100" y1="180" x2="152" y2="213" stroke="white" stroke-width="1.3" opacity=".25"/>
+    <line x1="100" y1="218" x2="138" y2="244" stroke="white" stroke-width="1.3" opacity=".25"/>
+    <line x1="100" y1="95"  x2="48"  y2="142" stroke="white" stroke-width="1.3" opacity=".25"/>
+    <line x1="100" y1="138" x2="42"  y2="178" stroke="white" stroke-width="1.3" opacity=".25"/>
+    <line x1="100" y1="180" x2="48"  y2="213" stroke="white" stroke-width="1.3" opacity=".25"/>
+    <line x1="100" y1="218" x2="62"  y2="244" stroke="white" stroke-width="1.3" opacity=".25"/>
+  </symbol>
+</svg>
+
+<!-- ═══ INTRO SCREEN ═══════════════════════════ -->
+<div id="intro">
+  <canvas id="bloom-canvas"></canvas>
+
+  <svg class="i-leaf" style="top:6%;left:4%;width:180px;opacity:.06;--base-rot:rotate(0deg)" color="#c9a046"><use href="#leaf"/></svg>
+  <svg class="i-leaf" style="bottom:8%;right:3%;width:220px;opacity:.06;--base-rot:rotate(162deg);animation-delay:-3s" color="#c6d9c2"><use href="#leaf"/></svg>
+  <svg class="i-leaf" style="top:50%;left:1%;width:120px;opacity:.05;--base-rot:rotate(42deg);animation-delay:-1.5s" color="#c9a046"><use href="#leaf"/></svg>
+  <svg class="i-leaf" style="top:16%;right:2%;width:150px;opacity:.05;--base-rot:rotate(198deg);animation-delay:-5s" color="#c6d9c2"><use href="#leaf"/></svg>
+
+  <div class="intro-content">
+    <div class="i-rule"></div>
+    <div class="i-brand-serene">SERENE</div>
+    <div class="i-brand-arya">ARYA</div>
+    <div class="i-tagline">Senior Living</div>
+    <div class="i-rule-b"></div>
+    <div class="countdown-wrap" id="countdown-wrap">
+      <div class="c-label">Inauguration begins in</div>
+      <div class="c-units">
+        <div class="c-unit"><div class="c-num" id="cd-h">00</div><div class="c-ulabel">Hours</div></div>
+        <div class="c-dot">&middot;</div>
+        <div class="c-unit"><div class="c-num" id="cd-m">00</div><div class="c-ulabel">Min</div></div>
+        <div class="c-dot">&middot;</div>
+        <div class="c-unit"><div class="c-num" id="cd-s">00</div><div class="c-ulabel">Sec</div></div>
+      </div>
+      <div class="c-live" id="c-live">✦ Live Now ✦</div>
+      <button class="enter-btn" id="enter-btn" onclick="revealSite()">Enter &rarr;</button>
+    </div>
+  </div>
+</div>
+
+<!-- CURTAIN + PARTICLES -->
+<div class="reveal-layer" id="curtain"></div>
+<div id="particles"></div>
+
+<!-- ═══ NAV ════════════════════════════════════ -->
+<nav class="nav" id="nav">
+  <div class="nav-logo">
+    <img src="logo.jpg" alt="Serene Arya">
+    <div class="nav-brand">Serene Arya<span>Senior Living</span></div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#welcome">About</a></li>
+    <li><a href="#offerings">Offerings</a></li>
+    <li><a href="#pillars">Our Values</a></li>
+    <li><a href="#contact" class="nav-cta">Find Us</a></li>
+  </ul>
+</nav>
+
+<!-- ═══ HERO ════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <div class="hero-bg-img"></div>
+  <div class="hero-vignette"></div>
+  <div class="hero-ring"></div>
+  <div class="hero-ring"></div>
+
+  <div class="hero-inner">
+    <div class="hero-badge">Grand Inauguration &nbsp;&middot;&nbsp; 14 May 2025</div>
+
+    <div class="logo-wrap">
+      <img src="logo.jpg" alt="Serene Arya Senior Living">
+    </div>
+
+    <h1 class="hero-title">Serene <em>Arya</em></h1>
+    <p class="hero-sub">Senior Living</p>
+
+    <div class="gold-rule"><span class="gold-rule-icon">✦</span></div>
+
+    <div class="event-card">
+      <div class="event-pill">✦ Inauguration Ceremony ✦</div>
+      <div class="event-date"><strong>Wednesday, 14 May 2025</strong></div>
+      <div class="event-time">Celebrations begin at 10:00 AM</div>
+      <div class="event-divider"></div>
+      <div class="event-address">
+        Kaviyadu School Road, Kambikkakam<br>
+        Manikkal, Thiruvananthapuram, Kerala &nbsp;695&thinsp;615
+      </div>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- ═══ WELCOME ══════════════════════════════════ -->
+<section class="welcome" id="welcome">
+  <svg class="corner-leaf tl" color="#4e7a48"><use href="#leaf"/></svg>
+  <svg class="corner-leaf br" color="#4e7a48"><use href="#leaf"/></svg>
+  <div class="welcome-inner">
+    <p class="section-eyebrow reveal">A Warm Welcome</p>
+    <h2 class="section-title reveal reveal-delay-1">"Where every morning holds<br>a reason to look forward."</h2>
+    <p class="welcome-body reveal reveal-delay-2">
+      Serene Arya was built around a simple and profound truth: our elders deserve to live fully.
+      Not just safely, not just quietly — but with vitality, belonging, and real joy. This is a
+      community where assisted care, holistic wellness, and vibrant daily life come together in
+      one beautiful, nurturing home.
+      <br><br>
+      From the gardens of Manikkal, we open our doors today with immense gratitude to every
+      family, caregiver, and neighbour who has walked this journey with us.
+    </p>
+    <div class="welcome-sig reveal reveal-delay-3">
+      With warmth and gratitude
+      <strong>The Serene Arya Family</strong>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ STORY 1 — Community Living ══════════════ -->
+<section class="story reveal">
+  <div class="story-img">
+    <img src="https://images.unsplash.com/photo-1582750433449-648ed127bb54?w=900&auto=format&fit=crop&q=80" alt="Elders enjoying community life together" loading="lazy">
+  </div>
+  <div class="story-body">
+    <svg class="story-deco-leaf" color="#4e7a48"><use href="#leaf"/></svg>
+    <div class="story-num">01</div>
+    <span class="story-tag">Community Living</span>
+    <h3>A home that feels like family, every single day</h3>
+    <p>
+      Loneliness is one of the greatest challenges of later life. Serene Arya was designed as an
+      answer to that. Residents share meals, celebrate festivals, walk through gardens, and support
+      each other through the full texture of daily life. It is not a building where people happen
+      to live near each other — it is a place where people genuinely belong to each other.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ STORY 2 — Assisted Care ════════════════ -->
+<section class="story flip reveal">
+  <div class="story-img">
+    <img src="https://images.unsplash.com/photo-1576765608535-5f04d1e3f289?w=900&auto=format&fit=crop&q=80" alt="Compassionate assisted care for seniors" loading="lazy">
+  </div>
+  <div class="story-body dark">
+    <svg class="story-deco-leaf" color="#c6d9c2"><use href="#leaf"/></svg>
+    <div class="story-num">02</div>
+    <span class="story-tag">Assisted Care</span>
+    <h3>Care woven in, not added on</h3>
+    <p>
+      Our caregiving approach is built on the belief that professional support should feel like
+      warmth, not a clinical routine. Residents have access to round-the-clock nursing care,
+      scheduled physician visits, physiotherapy, and emergency response — all delivered by a team
+      trained to care as much as they treat.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ STORY 3 — Holistic Wellness ════════════ -->
+<section class="story reveal">
+  <div class="story-img">
+    <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=900&auto=format&fit=crop&q=80" alt="Yoga and holistic wellness for seniors" loading="lazy">
+  </div>
+  <div class="story-body gold-bg">
+    <svg class="story-deco-leaf" color="#c9a046"><use href="#leaf"/></svg>
+    <div class="story-num">03</div>
+    <span class="story-tag">Holistic Wellness</span>
+    <h3>Healing the whole person, not just the body</h3>
+    <p>
+      True wellbeing reaches far beyond medical care. At Serene Arya, Ayurvedic therapies, yoga,
+      guided meditation, and personalised wellness plans are woven into the rhythm of each day.
+      These are not optional extras — they are the heartbeat of how we keep our residents
+      energised, peaceful, and fully alive.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ STORY 4 — Recreation ════════════════════ -->
+<section class="story flip reveal">
+  <div class="story-img">
+    <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=900&auto=format&fit=crop&q=80" alt="Music and cultural activities for seniors" loading="lazy">
+  </div>
+  <div class="story-body">
+    <svg class="story-deco-leaf" color="#4e7a48"><use href="#leaf"/></svg>
+    <div class="story-num">04</div>
+    <span class="story-tag">Recreational Activities</span>
+    <h3>Because joy is not a luxury. It is essential.</h3>
+    <p>
+      Every day at Serene Arya carries something to look forward to. Music sessions, classical
+      arts, cultural programmes, spiritual gatherings, gardening mornings, and creative workshops
+      fill our calendar with colour and meaning. A mind engaged is a mind alive, and we take
+      that responsibility seriously in everything we plan.
+    </p>
+  </div>
+</section>
+
+<!-- ═══ GALLERY STRIP ════════════════════════════ -->
+<div class="gallery-strip" aria-label="Life at Serene Arya">
+  <div class="gal-cell">
+    <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&auto=format&fit=crop&q=75" alt="Senior living garden" loading="lazy">
+  </div>
+  <div class="gal-cell">
+    <img src="https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=600&auto=format&fit=crop&q=75" alt="Outdoor wellness session" loading="lazy">
+  </div>
+  <div class="gal-cell">
+    <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&auto=format&fit=crop&q=75" alt="Traditional Kerala cuisine" loading="lazy">
+  </div>
+  <div class="gal-cell">
+    <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&auto=format&fit=crop&q=75" alt="Peaceful natural surroundings" loading="lazy">
+  </div>
+</div>
+
+<!-- ═══ OFFERINGS ════════════════════════════════ -->
+<section class="offerings" id="offerings">
+  <svg class="corner-leaf tl" style="top:50px;left:-60px;width:300px;transform:rotate(-30deg)" color="#4e7a48"><use href="#leaf"/></svg>
+  <svg class="corner-leaf br" style="bottom:60px;right:-55px;width:260px;transform:rotate(150deg)" color="#4e7a48"><use href="#leaf"/></svg>
+
+  <p class="section-eyebrow reveal">Everything Under One Roof</p>
+  <h2 class="section-title reveal reveal-delay-1">Life, Fully Lived</h2>
+  <p style="font-size:.8rem;font-weight:300;letter-spacing:.1em;color:var(--text-light);position:relative;z-index:1" class="reveal reveal-delay-2">Six pillars of living, integrated seamlessly into every day</p>
+
+  <div class="offer-grid">
+
+    <div class="offer-card reveal">
+      <div class="offer-img-wrap">
+        <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&auto=format&fit=crop&q=75" alt="Community connection" loading="lazy">
+        <div class="offer-img-overlay"></div>
+      </div>
+      <div class="offer-body">
+        <div class="offer-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        </div>
+        <h3>Community Living</h3>
+        <p>Shared meals, festive celebrations, and the warmth of belonging to a family beyond blood.</p>
+      </div>
+    </div>
+
+    <div class="offer-card reveal reveal-delay-1">
+      <div class="offer-img-wrap">
+        <img src="https://images.unsplash.com/photo-1559839734-2b71ea197ec2?w=600&auto=format&fit=crop&q=75" alt="Nursing and medical care" loading="lazy">
+        <div class="offer-img-overlay"></div>
+      </div>
+      <div class="offer-body">
+        <div class="offer-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+        </div>
+        <h3>Assisted Care</h3>
+        <p>24×7 nursing support, physician visits, physiotherapy, and emergency response — care that never feels institutional.</p>
+      </div>
+    </div>
+
+    <div class="offer-card reveal reveal-delay-2">
+      <div class="offer-img-wrap">
+        <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=600&auto=format&fit=crop&q=75" alt="Ayurveda and wellness" loading="lazy">
+        <div class="offer-img-overlay"></div>
+      </div>
+      <div class="offer-body">
+        <div class="offer-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3>Holistic Wellness</h3>
+        <p>Ayurvedic treatments, yoga, meditation, and personalised wellness plans that tend to body, mind, and spirit as one.</p>
+      </div>
+    </div>
+
+    <div class="offer-card reveal">
+      <div class="offer-img-wrap">
+        <img src="https://images.unsplash.com/photo-1513364776144-60967b0f800f?w=600&auto=format&fit=crop&q=75" alt="Music and cultural activities" loading="lazy">
+        <div class="offer-img-overlay"></div>
+      </div>
+      <div class="offer-body">
+        <div class="offer-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8"><circle cx="12" cy="12" r="10"/><polygon points="10 8 16 12 10 16 10 8"/></svg>
+        </div>
+        <h3>Recreational Activities</h3>
+        <p>Music, art, cultural programmes, garden clubs, and spiritual gatherings — a rich daily calendar full of meaning.</p>
+      </div>
+    </div>
+
+    <div class="offer-card reveal reveal-delay-1">
+      <div class="offer-img-wrap">
+        <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&auto=format&fit=crop&q=75" alt="Nutritious Kerala cuisine" loading="lazy">
+        <div class="offer-img-overlay"></div>
+      </div>
+      <div class="offer-body">
+        <div class="offer-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8"><path d="M18 8h1a4 4 0 0 1 0 8h-1"/><path d="M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><line x1="6" y1="1" x2="6" y2="4"/><line x1="10" y1="1" x2="10" y2="4"/><line x1="14" y1="1" x2="14" y2="4"/></svg>
+        </div>
+        <h3>Nutritious Dining</h3>
+        <p>Fresh Kerala cuisine prepared daily, tailored to individual dietary and medical needs, shared at communal tables.</p>
+      </div>
+    </div>
+
+    <div class="offer-card reveal reveal-delay-2">
+      <div class="offer-img-wrap">
+        <img src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&auto=format&fit=crop&q=75" alt="Safe managed campus" loading="lazy">
+        <div class="offer-img-overlay"></div>
+      </div>
+      <div class="offer-body">
+        <div class="offer-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="var(--gold)" stroke-width="1.8"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points="9 12 11 14 15 10"/></svg>
+        </div>
+        <h3>Safe &amp; Managed</h3>
+        <p>CCTV monitoring, trained caregiving staff, and a gated professionally managed campus. Families rest completely at ease.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ═══ PILLARS ══════════════════════════════════ -->
+<section class="pillars" id="pillars">
+  <p class="section-eyebrow reveal">Our Four Foundations</p>
+  <h2 class="section-title reveal reveal-delay-1">What Serene Arya<br>Is Built Upon</h2>
+  <p class="pillars-sub reveal reveal-delay-2">Every decision, every space, and every person here exists to honour these commitments</p>
+  <div class="pillar-grid">
+    <div class="pillar-card reveal">
+      <div class="pillar-num">01</div>
+      <h3>Dignity</h3>
+      <p>Every resident carries a lifetime of wisdom, love, and contribution. We honour that story in how we speak, how we care, and how we design each day around their preferences.</p>
+    </div>
+    <div class="pillar-card reveal reveal-delay-1">
+      <div class="pillar-num">02</div>
+      <h3>Comfort</h3>
+      <p>Thoughtfully designed spaces, attentive staff, and a pace of life that feels unhurried and personal. Ease is the standard here, not the exception.</p>
+    </div>
+    <div class="pillar-card reveal reveal-delay-2">
+      <div class="pillar-num">03</div>
+      <h3>Vitality</h3>
+      <p>The golden years should be genuinely golden. Wellness, creative activities, and community life keep every resident engaged and alive in spirit.</p>
+    </div>
+    <div class="pillar-card reveal reveal-delay-3">
+      <div class="pillar-num">04</div>
+      <h3>Trust</h3>
+      <p>Families place the people they love most in our care. That trust is the foundation of everything we do — protected with transparency and genuine commitment.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ QUOTE ════════════════════════════════════ -->
+<section class="quote-band">
+  <div class="quote-mark reveal">"</div>
+  <p class="quote-text reveal reveal-delay-1">
+    The finest gift we can give to those who spent their lives giving to others is a community
+    that truly sees them, celebrates them, and walks beside them every single day.
+  </p>
+  <p class="quote-attr reveal reveal-delay-2">The Serene Arya Philosophy</p>
+</section>
+
+<!-- ═══ CONTACT ══════════════════════════════════ -->
+<section class="contact" id="contact">
+  <svg class="corner-leaf tl" style="top:-40px;left:-40px;width:240px;transform:rotate(-20deg)" color="#c6d9c2"><use href="#leaf"/></svg>
+  <svg class="corner-leaf br" style="bottom:-40px;right:-40px;width:240px;transform:rotate(155deg)" color="#c6d9c2"><use href="#leaf"/></svg>
+  <h3>Find Us in Manikkal</h3>
+  <p>
+    <strong>Serene Arya Senior Living</strong><br>
+    Kaviyadu School Road, Kambikkakam<br>
+    Manikkal, Thiruvananthapuram, Kerala &nbsp; 695&thinsp;615
+  </p>
+  <div class="contact-divider"></div>
+  <div class="contact-phones">
+    <span>+91 98950 XXXXX</span>
+    <span>+91 97440 XXXXX</span>
+  </div>
+  <a class="map-btn" href="https://maps.google.com/?q=Manikkal+Kerala+695615" target="_blank" rel="noopener">Open in Google Maps &nearr;</a>
+</section>
+
+<!-- ═══ FOOTER ════════════════════════════════════ -->
+<footer>
+  <strong>Serene Arya Senior Living</strong>
+  <div class="f-rule"></div>
+  Kaviyadu School Road, Kambikkakam, Manikkal, Kerala 695&thinsp;615<br>
+  &copy; 2025 Serene Arya. Crafted with love for our elders.
+</footer>
+
+<script>
+/* ── BLOOM CANVAS ───────────────────────────── */
+(function(){
+  const canvas = document.getElementById('bloom-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, pts = [];
+  function resize(){ W = canvas.width = innerWidth; H = canvas.height = innerHeight; }
+  resize(); addEventListener('resize', resize);
+  function P(){
+    this.reset = function(){
+      this.x = W/2 + (Math.random()-.5)*W*.28;
+      this.y = H/2 + (Math.random()-.5)*H*.28;
+      this.r = 1 + Math.random()*2.2;
+      const a = Math.random()*Math.PI*2, s = .06+Math.random()*.18;
+      this.vx = Math.cos(a)*s; this.vy = Math.sin(a)*s;
+      this.life = 0; this.max = 180+Math.random()*240;
+      this.isGold = Math.random()>.4;
+    }; this.reset();
+  }
+  for(let i=0;i<100;i++){ const p=new P(); p.life=Math.random()*p.max; pts.push(p); }
+  let bR=80, bD=1;
+  function draw(){
+    ctx.clearRect(0,0,W,H);
+    bR+=bD*.3; if(bR>170||bR<70) bD*=-1;
+    const g=ctx.createRadialGradient(W/2,H/2,0,W/2,H/2,bR+130);
+    g.addColorStop(0,'rgba(201,160,70,.07)');
+    g.addColorStop(.45,'rgba(45,74,42,.04)');
+    g.addColorStop(1,'rgba(0,0,0,0)');
+    ctx.fillStyle=g; ctx.fillRect(0,0,W,H);
+    pts.forEach(p=>{
+      p.life++; if(p.life>p.max) p.reset();
+      const pr=p.life/p.max;
+      const al=pr<.15?pr/.15*.65:pr>.8?(1-pr)/.2*.65:.65;
+      p.x+=p.vx; p.y+=p.vy;
+      ctx.beginPath(); ctx.arc(p.x,p.y,p.r*(1-pr*.35),0,Math.PI*2);
+      ctx.fillStyle=p.isGold?`rgba(201,160,70,${al*.5})`:`rgba(45,74,42,${al*.28})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+/* ── COUNTDOWN ──────────────────────────────── */
+const TARGET = new Date('2025-05-14T10:00:00+05:30');
+function pad(n){ return String(n).padStart(2,'0'); }
+function tick(){
+  const diff = TARGET - Date.now();
+  if(diff <= 0){
+    document.querySelector('.c-units').style.display = 'none';
+    document.querySelector('.c-label').style.display = 'none';
+    document.getElementById('c-live').style.display = 'block';
+    document.getElementById('enter-btn').style.display = 'inline-block';
+    return;
+  }
+  document.getElementById('cd-h').textContent = pad(Math.floor(diff/3600000));
+  document.getElementById('cd-m').textContent = pad(Math.floor((diff%3600000)/60000));
+  document.getElementById('cd-s').textContent = pad(Math.floor((diff%60000)/1000));
+}
+tick(); setInterval(tick, 1000);
+
+/* ── REVEAL SITE ────────────────────────────── */
+function revealSite(){
+  const intro = document.getElementById('intro');
+  intro.classList.add('fade-out');
+  setTimeout(()=>{
+    intro.style.display='none';
+    document.getElementById('curtain').classList.add('open');
+    spawnParticles();
+  }, 1000);
+}
+// Ctrl+Shift+S shortcut
+const K={c:false,s:false,sh:false};
+document.addEventListener('keydown',e=>{
+  if(e.key==='Control') K.c=true;
+  if(e.key==='Shift')   K.sh=true;
+  if(e.key==='s'||e.key==='S') K.s=true;
+  if(K.c&&K.sh&&K.s) revealSite();
+});
+document.addEventListener('keyup',e=>{
+  if(e.key==='Control') K.c=false;
+  if(e.key==='Shift')   K.sh=false;
+  if(e.key==='s'||e.key==='S') K.s=false;
+});
+
+/* ── PARTICLES ──────────────────────────────── */
+function spawnParticles(){
+  const c = document.getElementById('particles');
+  for(let i=0;i<40;i++){
+    const p = document.createElement('div'); p.className='particle';
+    const sz = 3+Math.random()*6;
+    p.style.cssText=`left:${Math.random()*100}%;bottom:0;width:${sz}px;height:${sz}px;background:rgba(${Math.random()>.5?'201,160,70':'45,74,42'},${.1+Math.random()*.22});animation-duration:${8+Math.random()*13}s;animation-delay:${Math.random()*5}s;`;
+    c.appendChild(p);
+  }
+}
+
+/* ── NAV SCROLL ─────────────────────────────── */
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', ()=>{
+  nav.classList.toggle('scrolled', scrollY > 60);
+}, { passive:true });
+
+/* ── SCROLL REVEAL ──────────────────────────── */
+const io = new IntersectionObserver(entries=>{
+  entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold:.1 });
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+</script>
+</body>
+</html>

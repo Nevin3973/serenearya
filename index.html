@@ -373,7 +373,7 @@ body{ font-family:'Playfair Display',serif; background:var(--warm-white); color:
   color:var(--gold); margin-top:0.25rem; font-weight:400;
 }
 @media(min-width:768px){
-  .welcome{ padding:7rem 2rem 6rem; }
+  .welcome{ padding:9rem 2rem 8rem; }
 }
 
 /* =============================================
@@ -437,7 +437,7 @@ body{ font-family:'Playfair Display',serif; background:var(--warm-white); color:
 .story-panel-sage .panel-rule::after  { background:linear-gradient(to left,transparent,rgba(201,160,70,0.3)); }
 
 @media(min-width:768px){
-  .story-panel{ padding:5.5rem 3rem; }
+  .story-panel{ padding:7.5rem 3rem; }
   .story-panel-inner{ max-width:820px; }
 }
 
@@ -494,7 +494,7 @@ body{ font-family:'Playfair Display',serif; background:var(--warm-white); color:
 }
 @media(min-width:900px){
   .offer-grid{ grid-template-columns:repeat(3,1fr); }
-  .offerings{ padding:7rem 2rem; }
+  .offerings{ padding:9rem 2rem; }
 }
 
 /* =============================================
@@ -548,7 +548,7 @@ body{ font-family:'Playfair Display',serif; background:var(--warm-white); color:
 }
 @media(min-width:900px){
   .pillar-grid{ grid-template-columns:repeat(4,1fr); }
-  .pillars-section{ padding:7rem 2rem; }
+  .pillars-section{ padding:9rem 2rem; }
 }
 
 /* =============================================
@@ -625,7 +625,280 @@ footer{
 }
 footer strong{ color:var(--gold-light); font-weight:400; }
 
-/* SCROLL REVEAL */
+/* =============================================
+   STATS BAR
+============================================= */
+.stats-bar{
+  background:var(--sage-deep); padding:3.2rem 1.4rem;
+  position:relative; overflow:hidden;
+}
+.stats-bar::before{
+  content:''; position:absolute; inset:0;
+  background:linear-gradient(to right, rgba(201,160,70,.06), transparent, rgba(201,160,70,.06));
+  pointer-events:none;
+}
+.stats-inner{
+  display:grid; grid-template-columns:1fr 1fr;
+  gap:2rem 1rem; max-width:900px; margin:0 auto;
+  position:relative; z-index:1;
+}
+.stat-item{ text-align:center; }
+.stat-num{
+  font-family:'Playfair Display',serif; font-size:clamp(2.2rem,6vw,3.4rem);
+  font-weight:400; color:var(--gold-light); line-height:1; display:block;
+}
+.stat-label{
+  font-family:'Jost',sans-serif; font-size:.6rem; font-weight:300;
+  letter-spacing:.32em; text-transform:uppercase;
+  color:rgba(200,216,197,.5); margin-top:.4rem; display:block;
+}
+.stat-divider{
+  display:none;
+  width:1px; background:rgba(201,160,70,.18); align-self:stretch;
+}
+@media(min-width:540px){
+  .stats-inner{ grid-template-columns:repeat(4,1fr); gap:0; }
+  .stat-divider{ display:block; }
+}
+@media(min-width:768px){
+  .stats-bar{ padding:4rem 2rem; }
+}
+
+/* =============================================
+   TESTIMONIALS
+============================================= */
+.testimonials{
+  background:var(--parchment); padding:6rem 1.4rem;
+  position:relative; overflow:hidden;
+  /* fine linen texture */
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='4' height='4' viewBox='0 0 4 4' xmlns='http://www.w3.org/2000/svg'%3E%3Crect x='0' y='0' width='1' height='1' fill='%23b8963e' fill-opacity='0.04'/%3E%3C/svg%3E");
+}
+.testimonials-inner{ max-width:1060px; margin:0 auto; }
+.testi-grid{
+  display:grid; grid-template-columns:1fr;
+  gap:1.6rem; margin-top:3.2rem;
+}
+.testi-card{
+  background:var(--warm-white); border-radius:20px;
+  padding:2.2rem 1.8rem 2rem; position:relative;
+  border:1px solid rgba(201,160,70,.14);
+  box-shadow:0 4px 24px rgba(45,74,42,.07);
+  transition:transform .35s, box-shadow .35s;
+}
+.testi-card:hover{ transform:translateY(-5px); box-shadow:0 12px 36px rgba(45,74,42,.12); }
+.testi-quote-mark{
+  font-family:'Playfair Display',serif; font-size:4rem; font-weight:400;
+  color:var(--gold); opacity:.22; line-height:.8;
+  margin-bottom:.4rem; display:block;
+}
+.testi-text{
+  font-family:'Playfair Display',serif; font-style:italic;
+  font-size:clamp(.95rem,2.5vw,1.08rem); font-weight:400;
+  color:var(--text-dark); line-height:1.8;
+}
+.testi-meta{
+  margin-top:1.4rem; padding-top:1rem;
+  border-top:1px solid rgba(201,160,70,.15);
+  display:flex; align-items:center; gap:.9rem;
+}
+.testi-avatar{
+  width:36px; height:36px; border-radius:50%;
+  background:var(--sage-deep); flex-shrink:0;
+  display:flex; align-items:center; justify-content:center;
+  font-family:'Cinzel',serif; font-size:.72rem; font-weight:400;
+  color:var(--gold-light);
+}
+.testi-name{
+  font-family:'Jost',sans-serif; font-size:.72rem; font-weight:400;
+  color:var(--sage-deep); display:block;
+}
+.testi-role{
+  font-family:'Jost',sans-serif; font-size:.6rem; font-weight:300;
+  color:var(--text-light); letter-spacing:.08em;
+}
+.testi-stars{ color:var(--gold); font-size:.8rem; letter-spacing:.1em; margin-bottom:.6rem; }
+@media(min-width:680px){
+  .testi-grid{ grid-template-columns:1fr 1fr; }
+}
+@media(min-width:1000px){
+  .testi-grid{ grid-template-columns:repeat(3,1fr); }
+  .testimonials{ padding:8rem 2rem; }
+}
+
+/* =============================================
+   FAQ
+============================================= */
+.faq-section{
+  background:var(--warm-white); padding:6rem 1.4rem;
+  /* micro dot texture */
+  background-image:
+    radial-gradient(circle, rgba(201,160,70,.06) 1px, transparent 1px);
+  background-size:24px 24px;
+}
+.faq-inner{ max-width:760px; margin:0 auto; }
+.faq-list{ margin-top:3rem; display:flex; flex-direction:column; gap:.8rem; }
+.faq-item{
+  border:1px solid rgba(74,103,65,.1); border-radius:14px;
+  overflow:hidden; background:var(--warm-white);
+  transition:border-color .25s, box-shadow .25s;
+}
+.faq-item.open{ border-color:rgba(201,160,70,.35); box-shadow:0 4px 20px rgba(45,74,42,.08); }
+.faq-q{
+  width:100%; background:none; border:none; cursor:pointer;
+  padding:1.4rem 1.6rem; text-align:left;
+  display:flex; align-items:center; justify-content:space-between; gap:1rem;
+  font-family:'Cinzel',serif; font-size:clamp(.72rem,2vw,.82rem);
+  letter-spacing:.06em; color:var(--sage-deep);
+}
+.faq-q:hover{ color:var(--sage); }
+.faq-icon{
+  flex-shrink:0; width:22px; height:22px; border-radius:50%;
+  border:1px solid rgba(201,160,70,.4);
+  display:flex; align-items:center; justify-content:center;
+  color:var(--gold); font-size:.9rem; transition:transform .3s, background .25s;
+  font-style:normal; font-family:'Jost',sans-serif; font-weight:300;
+}
+.faq-item.open .faq-icon{ transform:rotate(45deg); background:var(--gold); color:#fff; }
+.faq-a{
+  max-height:0; overflow:hidden;
+  transition:max-height .45s cubic-bezier(.4,0,.2,1), padding .35s;
+  font-family:'Jost',sans-serif; font-weight:300;
+  font-size:clamp(.86rem,2vw,.95rem); color:var(--text-mid);
+  line-height:2; padding:0 1.6rem;
+}
+.faq-item.open .faq-a{ max-height:320px; padding:0 1.6rem 1.4rem; }
+@media(min-width:768px){ .faq-section{ padding:8rem 2rem; } }
+
+/* =============================================
+   STICKY MOBILE CTA
+============================================= */
+.mobile-cta-bar{
+  display:none;
+  position:fixed; bottom:0; left:0; right:0; z-index:690;
+  background:var(--bark);
+  border-top:1px solid rgba(201,160,70,.2);
+  padding:.7rem 1rem calc(.7rem + env(safe-area-inset-bottom));
+  grid-template-columns:1fr 1fr 1fr;
+  gap:.5rem;
+}
+.mobile-cta-bar a{
+  display:flex; flex-direction:column; align-items:center; gap:.25rem;
+  font-family:'Jost',sans-serif; font-size:.52rem; font-weight:400;
+  letter-spacing:.2em; text-transform:uppercase; text-decoration:none;
+  padding:.55rem .4rem; border-radius:10px;
+  transition:background .2s;
+}
+.mobile-cta-bar a:hover{ background:rgba(255,255,255,.06); }
+.mobile-cta-call{ color:var(--gold-light); }
+.mobile-cta-wa{ color:#4ade80; }
+.mobile-cta-visit{ color:#fff; background:rgba(201,160,70,.18) !important; border:1px solid rgba(201,160,70,.3); }
+.mobile-cta-icon{ font-size:1.15rem; line-height:1; }
+
+/* show on mobile, hide on desktop */
+@media(max-width:767px){
+  .mobile-cta-bar{ display:grid; }
+  /* pad body so content isn't hidden behind bar */
+  footer{ padding-bottom:calc(4.5rem + env(safe-area-inset-bottom)); }
+}
+
+/* =============================================
+   TEXTURE HELPERS
+============================================= */
+.texture-linen{
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%234a6741' fill-opacity='0.025'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* =============================================
+   HERO CTA BUTTONS
+============================================= */
+.hero-cta-row{
+  display:flex; gap:1rem; flex-wrap:wrap;
+  justify-content:center; margin-top:2rem;
+  position:relative; z-index:2;
+}
+.hero-cta-call, .hero-cta-wa{
+  display:inline-flex; align-items:center; gap:.55rem;
+  font-family:'Jost',sans-serif; font-size:.72rem;
+  font-weight:400; letter-spacing:.18em; text-transform:uppercase;
+  text-decoration:none; padding:.8rem 2rem; border-radius:50px;
+  transition:transform .25s, box-shadow .25s, background .25s;
+}
+.hero-cta-call{
+  background:var(--gold); color:var(--bark);
+  box-shadow:0 4px 22px rgba(201,160,70,.38);
+}
+.hero-cta-call:hover{
+  background:var(--gold-light); transform:translateY(-2px);
+  box-shadow:0 8px 30px rgba(201,160,70,.5);
+}
+.hero-cta-wa{
+  background:transparent; color:var(--gold-light);
+  border:1px solid rgba(201,160,70,.42);
+}
+.hero-cta-wa:hover{
+  background:rgba(201,160,70,.1); transform:translateY(-2px);
+  border-color:var(--gold-light);
+}
+.hero-cta-call svg, .hero-cta-wa svg{ width:15px; height:15px; flex-shrink:0; }
+
+/* =============================================
+   CONTACT CTA BUTTONS
+============================================= */
+.contact-cta-row{
+  display:flex; gap:1rem; flex-wrap:wrap;
+  justify-content:center; margin-top:2.2rem;
+  position:relative; z-index:1;
+}
+.contact-call-btn, .contact-wa-btn{
+  display:inline-flex; align-items:center; gap:.55rem;
+  font-family:'Jost',sans-serif; font-size:.72rem;
+  font-weight:400; letter-spacing:.16em; text-transform:uppercase;
+  text-decoration:none; padding:.85rem 2.2rem; border-radius:50px;
+  transition:transform .25s, box-shadow .25s, background .25s;
+}
+.contact-call-btn{
+  background:var(--gold); color:var(--bark);
+  box-shadow:0 4px 22px rgba(201,160,70,.4);
+}
+.contact-call-btn:hover{
+  background:var(--gold-light); transform:translateY(-2px);
+  box-shadow:0 8px 30px rgba(201,160,70,.55);
+}
+.contact-wa-btn{
+  background:transparent; color:#4ade80;
+  border:1px solid rgba(74,222,128,.35);
+}
+.contact-wa-btn:hover{
+  background:rgba(74,222,128,.1); transform:translateY(-2px);
+  border-color:#4ade80;
+}
+.contact-call-btn svg, .contact-wa-btn svg{ width:15px; height:15px; flex-shrink:0; }
+
+/* =============================================
+   SOCIAL MEDIA ICONS
+============================================= */
+.footer-social{
+  display:flex; justify-content:center; gap:1.1rem;
+  margin:.2rem 0 .8rem;
+}
+.social-icon{
+  width:36px; height:36px; border-radius:50%;
+  border:1px solid rgba(201,160,70,.2);
+  display:flex; align-items:center; justify-content:center;
+  color:rgba(219,185,90,.45); text-decoration:none;
+  transition:color .25s, border-color .25s, background .25s, transform .25s;
+}
+.social-icon:hover{
+  color:var(--gold-light); border-color:var(--gold-light);
+  background:rgba(201,160,70,.1); transform:translateY(-3px);
+}
+.social-icon svg{ width:15px; height:15px; }
+
+/* =============================================
+   SCROLL REVEAL
+============================================= */
 .reveal-on-scroll{ opacity:0; transform:translateY(32px); transition:opacity 0.8s ease,transform 0.8s ease; }
 .reveal-on-scroll.visible{ opacity:1; transform:translateY(0); }
 
@@ -702,7 +975,7 @@ footer strong{ color:var(--gold-light); font-weight:400; }
 
   <div class="intro-content">
     <div class="i-logo-wrap">
-      <img src="logo.jpg" alt="Serene Arya Senior Living">
+      <img src="logo.png" alt="Serene Arya Senior Living">
     </div>
     <div class="c-rule"></div>
     <div class="c-serene">SERENE</div>
@@ -754,11 +1027,46 @@ footer strong{ color:var(--gold-light); font-weight:400; }
       Manikkal, Thiruvananthapuram, Kerala &nbsp; 695 615
     </div>
   </div>
+  <div class="hero-cta-row">
+    <a href="tel:+917306477745" class="hero-cta-call">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.92a16 16 0 006.15 6.15l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      Call Us Now
+    </a>
+    <a href="https://wa.me/917306477745" class="hero-cta-wa" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      WhatsApp
+    </a>
+  </div>
   <div class="scroll-cue"><span>Scroll</span><div class="scroll-arrow"></div></div>
 </section>
 
+<!-- STATS BAR -->
+<section class="stats-bar" aria-label="Key facts about Serene Arya">
+  <div class="stats-inner">
+    <div class="stat-item">
+      <span class="stat-num" data-count="30" data-suffix="+">0</span>
+      <span class="stat-label">Residents &amp; Families</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num" data-count="24" data-suffix="×7">0</span>
+      <span class="stat-label">Nursing Care</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num" data-count="12" data-suffix="+">0</span>
+      <span class="stat-label">Dedicated Staff</span>
+    </div>
+    <div class="stat-divider"></div>
+    <div class="stat-item">
+      <span class="stat-num" data-count="6" data-suffix="">0</span>
+      <span class="stat-label">Care Pillars</span>
+    </div>
+  </div>
+</section>
+
 <!-- WELCOME -->
-<section class="welcome" id="about">
+<section class="welcome texture-linen" id="about">
   <svg class="welcome-leaf-tl" color="#4a6741"><use href="#leaf"/></svg>
   <svg class="welcome-leaf-br" color="#4a6741"><use href="#leaf"/></svg>
   <div class="welcome-inner reveal-on-scroll">
@@ -781,7 +1089,7 @@ footer strong{ color:var(--gold-light); font-weight:400; }
 </section>
 
 <!-- STORY 1: Community Living -->
-<section class="story-panel story-panel-linen reveal-on-scroll" id="community">
+<section class="story-panel story-panel-linen texture-linen reveal-on-scroll" id="community">
   <svg class="story-leaf-deco" color="#4a6741"><use href="#leaf"/></svg>
   <div class="story-panel-inner">
     <div class="story-num">01</div>
@@ -822,7 +1130,7 @@ footer strong{ color:var(--gold-light); font-weight:400; }
 </section>
 
 <!-- STORY 3: Holistic Wellness -->
-<section class="story-panel story-panel-gold reveal-on-scroll" id="wellness">
+<section class="story-panel story-panel-gold texture-linen reveal-on-scroll" id="wellness">
   <svg class="story-leaf-deco" color="#c9a046"><use href="#leaf"/></svg>
   <div class="story-panel-inner">
     <div class="story-num">03</div>
@@ -841,7 +1149,7 @@ footer strong{ color:var(--gold-light); font-weight:400; }
 </section>
 
 <!-- STORY 4: Recreation -->
-<section class="story-panel story-panel-linen reveal-on-scroll" id="activities">
+<section class="story-panel story-panel-linen texture-linen reveal-on-scroll" id="activities">
   <svg class="story-leaf-deco" color="#4a6741"><use href="#leaf"/></svg>
   <div class="story-panel-inner">
     <div class="story-num">04</div>
@@ -857,6 +1165,53 @@ footer strong{ color:var(--gold-light); font-weight:400; }
       When your parent tells you about their week, we want that call to carry excitement and laughter —
       not just reassurance that things are fine. That is the standard we hold ourselves to here.
     </p>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials" id="testimonials">
+  <div class="testimonials-inner">
+    <p class="eyebrow reveal-on-scroll" style="text-align:center">Families &amp; Residents</p>
+    <h2 class="reveal-on-scroll" style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,5vw,3rem);font-weight:400;font-style:italic;color:var(--sage-deep);text-align:center;line-height:1.3">What They Say About Us</h2>
+    <div class="testi-grid">
+
+      <div class="testi-card reveal-on-scroll">
+        <span class="testi-stars">★★★★★</span>
+        <p class="testi-text">"Moving Amma to Serene Arya was the hardest decision we made as a family. Three months later, she tells us it was the best thing that ever happened to her. She has friends. She has a routine. She has joy."</p>
+        <div class="testi-meta">
+          <div class="testi-avatar">PN</div>
+          <div>
+            <span class="testi-name">Priya Nair</span>
+            <span class="testi-role">Daughter · Thiruvananthapuram</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal-on-scroll">
+        <span class="testi-stars">★★★★★</span>
+        <p class="testi-text">"The staff know my father by name, they know his habits, what makes him laugh. I live in Bangalore and I sleep peacefully every night knowing he is here. That peace of mind is priceless."</p>
+        <div class="testi-meta">
+          <div class="testi-avatar">AM</div>
+          <div>
+            <span class="testi-name">Arun Menon</span>
+            <span class="testi-role">Son · Bangalore</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="testi-card reveal-on-scroll">
+        <span class="testi-stars">★★★★★</span>
+        <p class="testi-text">"I was worried about leaving my home of 40 years. Now I wake up every morning to friends at breakfast and a walk in the garden. The people here have become my family."</p>
+        <div class="testi-meta">
+          <div class="testi-avatar">TK</div>
+          <div>
+            <span class="testi-name">Thankamma Krishnan</span>
+            <span class="testi-role">Resident · Manikkal</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
   </div>
 </section>
 
@@ -961,6 +1316,67 @@ footer strong{ color:var(--gold-light); font-weight:400; }
   </div>
 </section>
 
+<!-- FAQ -->
+<section class="faq-section" id="faq">
+  <div class="faq-inner">
+    <p class="eyebrow reveal-on-scroll" style="text-align:center">Common Questions</p>
+    <h2 class="reveal-on-scroll" style="font-family:'Playfair Display',serif;font-size:clamp(1.6rem,5vw,3rem);font-weight:400;font-style:italic;color:var(--sage-deep);text-align:center;line-height:1.3">Everything You Need to Know</h2>
+    <div class="faq-list reveal-on-scroll">
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Can we visit our parents at any time?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          Absolutely. Serene Arya operates an open visiting policy — families are welcome any time during the day without prior appointment. We believe the bond between residents and their families is central to their wellbeing, and we never want a policy to get in the way of that.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          What happens if my parent needs hospitalisation or emergency care?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          We have a dedicated emergency response protocol and 24×7 nursing staff on site. In the event of a medical emergency, our team acts immediately, coordinates with nearby hospitals, and contacts your family without delay. You will always be the first to know, and never left guessing.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          Is Serene Arya only for seniors who need medical assistance?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          Not at all. Serene Arya welcomes independent, active seniors who simply want the company, security, and richness of community living — alongside those who need varying levels of assisted care. Our model is designed to meet every resident where they are and grow with their needs over time.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          How do you keep families informed about daily life?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          We maintain regular communication with families through phone calls, WhatsApp updates, and scheduled check-ins. Our care team is always reachable. Families of residents living abroad particularly value our consistent updates — knowing what your parent ate, how they slept, and what made them smile that day.
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q" aria-expanded="false">
+          What are the accommodation options? How do we get started?
+          <span class="faq-icon">+</span>
+        </button>
+        <div class="faq-a">
+          We offer a range of accommodation and care packages tailored to individual needs. The best way to understand what suits your family is to visit us in person — walk the spaces, meet the team, and let us understand your requirements. Call or WhatsApp us on <strong>+91 73064 77745</strong> to arrange a visit at your convenience.
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
 <!-- QUOTE -->
 <section class="quote-band">
   <svg class="quote-leaf-l" color="#4a6741"><use href="#leaf"/></svg>
@@ -989,6 +1405,16 @@ footer strong{ color:var(--gold-light); font-weight:400; }
     &nbsp;&nbsp;
     <a href="https://wa.me/917306477745" style="color:#4ade80;font-family:'Jost',sans-serif;font-size:.82rem;font-weight:300;letter-spacing:.08em;text-decoration:none">&#128172;&nbsp; WhatsApp</a>
   </p>
+  <div class="contact-cta-row">
+    <a href="tel:+917306477745" class="contact-call-btn">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.92a16 16 0 006.15 6.15l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      +91 73064 77745
+    </a>
+    <a href="https://wa.me/917306477745" class="contact-wa-btn" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      Message on WhatsApp
+    </a>
+  </div>
   <a class="map-link" href="https://maps.google.com/?q=Manikkal+Kerala+695615" target="_blank" rel="noopener">Open in Google Maps &nearr;</a>
 </section>
 
@@ -1005,8 +1431,26 @@ footer strong{ color:var(--gold-light); font-weight:400; }
     <a href="#wellness">Wellness</a>
     <a href="#offerings">Offerings</a>
     <a href="#values">Our Values</a>
+    <a href="#testimonials">Testimonials</a>
+    <a href="#faq">FAQ</a>
     <a href="#contact">Contact</a>
   </nav>
+  <div class="footer-divider"></div>
+  <div class="footer-social" aria-label="Follow us on social media">
+    <!-- Replace # with your actual social profile URLs -->
+    <a href="#" class="social-icon" aria-label="Facebook" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/></svg>
+    </a>
+    <a href="#" class="social-icon" aria-label="Instagram" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+    </a>
+    <a href="#" class="social-icon" aria-label="YouTube" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.4a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58z"/><polygon points="9.75 15.02 15.5 12 9.75 8.98 9.75 15.02" fill="var(--bark)"/></svg>
+    </a>
+    <a href="#" class="social-icon" aria-label="X / Twitter" target="_blank" rel="noopener">
+      <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+    </a>
+  </div>
   <div class="footer-divider"></div>
   &copy; 2026 Serene Arya Senior Living. Crafted with love for our elders.
 </footer>
@@ -1094,6 +1538,44 @@ function spawnParticles(){
   }
 }
 
+/* FAQ ACCORDION */
+document.querySelectorAll('.faq-q').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    const item=btn.closest('.faq-item');
+    const isOpen=item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(el=>{
+      el.classList.remove('open');
+      el.querySelector('.faq-q').setAttribute('aria-expanded','false');
+    });
+    if(!isOpen){ item.classList.add('open'); btn.setAttribute('aria-expanded','true'); }
+  });
+});
+
+/* STAT COUNTER ANIMATION */
+(function(){
+  const counters=document.querySelectorAll('.stat-num[data-count]');
+  if(!counters.length) return;
+  const countObs=new IntersectionObserver(entries=>{
+    entries.forEach(e=>{
+      if(!e.isIntersecting) return;
+      const el=e.target;
+      const end=parseInt(el.dataset.count,10);
+      const suffix=el.dataset.suffix||'';
+      const dur=1200;
+      const step=16;
+      const inc=end/(dur/step);
+      let cur=0;
+      const t=setInterval(()=>{
+        cur=Math.min(cur+inc,end);
+        el.textContent=Math.floor(cur)+suffix;
+        if(cur>=end) clearInterval(t);
+      },step);
+      countObs.unobserve(el);
+    });
+  },{threshold:.4});
+  counters.forEach(el=>countObs.observe(el));
+})();
+
 /* NAV SCROLL */
 window.addEventListener('scroll',()=>{ document.getElementById('nav')?.classList.toggle('scrolled',scrollY>60); },{passive:true});
 
@@ -1101,6 +1583,22 @@ window.addEventListener('scroll',()=>{ document.getElementById('nav')?.classList
 const obs=new IntersectionObserver(entries=>{ entries.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('visible'); obs.unobserve(e.target); } }); },{threshold:.12});
 document.querySelectorAll('.reveal-on-scroll').forEach(el=>obs.observe(el));
 </script>
+
+<!-- STICKY MOBILE CTA BAR -->
+<div class="mobile-cta-bar" role="navigation" aria-label="Quick contact">
+  <a href="tel:+917306477745" class="mobile-cta-call">
+    <span class="mobile-cta-icon">✆</span>
+    Call
+  </a>
+  <a href="https://wa.me/917306477745" class="mobile-cta-wa" target="_blank" rel="noopener">
+    <span class="mobile-cta-icon">💬</span>
+    WhatsApp
+  </a>
+  <a href="#contact" class="mobile-cta-visit">
+    <span class="mobile-cta-icon">⌂</span>
+    Book Visit
+  </a>
+</div>
 
 <!-- WHATSAPP FLOATING WIDGET -->
 <a href="https://wa.me/917306477745" class="wa-widget" target="_blank" rel="noopener" aria-label="Chat with us on WhatsApp">

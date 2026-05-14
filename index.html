@@ -258,8 +258,8 @@ body{ font-family:'Playfair Display',serif; background:var(--warm-white); color:
   display:flex; flex-direction:column;
   align-items:center; justify-content:center;
   position:relative; overflow:hidden;
-  padding:5rem 1.2rem 7rem;
-  gap:.05rem;
+  padding:clamp(3rem,8vh,5rem) 1.4rem clamp(5rem,10vh,7rem);
+  row-gap:0;
 }
 .hero-ring{
   position:absolute; border-radius:50%;
@@ -272,27 +272,34 @@ body{ font-family:'Playfair Display',serif; background:var(--warm-white); color:
 .hero-leaves{ position:absolute; inset:0; pointer-events:none; overflow:hidden; }
 
 .hero-badge{
-  font-family:'Jost',sans-serif; font-weight:300; font-size:0.64rem;
-  letter-spacing:0.4em; text-transform:uppercase; color:var(--gold-light);
-  border:1px solid rgba(201,160,70,0.4); padding:0.42rem 1.8rem; border-radius:50px;
-  margin-bottom:2.5rem; animation:fadeUp 0.9s ease 0.2s both; position:relative; z-index:1;
+  font-family:'Jost',sans-serif; font-weight:300;
+  font-size:clamp(.52rem,.6vw+.4rem,.64rem);
+  letter-spacing:.32em; text-transform:uppercase; color:var(--gold-light);
+  border:1px solid rgba(201,160,70,0.35); padding:.38rem 1.4rem; border-radius:50px;
+  margin-bottom:clamp(1.2rem,3vh,2rem);
+  animation:fadeUp 0.9s ease 0.2s both; position:relative; z-index:1;
+  white-space:nowrap;
 }
-.logo-wrap{ animation:fadeUp 1s ease 0.4s both; margin-bottom:2rem; position:relative; z-index:1; }
-.logo-wrap img{ width:min(220px,52vw); filter:brightness(0) invert(1); }
+.logo-wrap{
+  animation:fadeUp 1s ease 0.4s both;
+  margin-bottom:clamp(.8rem,2vh,1.4rem);
+  position:relative; z-index:1;
+}
+.logo-wrap img{ width:min(200px,46vw); filter:brightness(0) invert(1); }
 .hero-title{
-  font-family:'Cinzel',serif; font-size:clamp(2.2rem,8vw,5.2rem); font-weight:500;
+  font-family:'Cinzel',serif; font-size:clamp(2rem,7.5vw,5.2rem); font-weight:500;
   color:#fff; text-align:center; line-height:1.05; letter-spacing:0.05em;
   animation:fadeUp 1s ease 0.55s both; position:relative; z-index:1;
 }
 .hero-title span{ color:var(--gold-light); }
 .hero-sub{
-  font-family:'Cinzel',serif; font-size:clamp(0.58rem,1.8vw,0.78rem);
-  letter-spacing:0.55em; color:rgba(200,216,197,0.7); text-transform:uppercase;
-  margin-top:0.5rem; animation:fadeUp 1s ease 0.7s both; position:relative; z-index:1;
+  font-family:'Cinzel',serif; font-size:clamp(0.52rem,1.6vw,0.78rem);
+  letter-spacing:.45em; color:rgba(200,216,197,0.65); text-transform:uppercase;
+  margin-top:.35rem; animation:fadeUp 1s ease 0.7s both; position:relative; z-index:1;
 }
 .terra-rule{
   display:flex; align-items:center; gap:1.2rem;
-  margin:2.2rem 0; width:min(300px,76vw);
+  margin:clamp(1rem,2.5vh,2rem) 0; width:min(280px,72vw);
   animation:fadeUp 1s ease 0.85s both; position:relative; z-index:1;
 }
 .terra-rule::before,.terra-rule::after{
@@ -344,8 +351,8 @@ body{ font-family:'Playfair Display',serif; background:var(--warm-white); color:
   100%{ transform:scaleY(0); transform-origin:bottom; opacity:0; }
 }
 @media(min-width:600px){
-  .hero{ padding:5rem 2rem 7rem; }
-  .logo-wrap img{ width:min(260px,32vw); }
+  .hero{ padding:5rem 2rem 8rem; }
+  .logo-wrap img{ width:min(240px,28vw); }
   .event-card{ padding:2rem 2.8rem; }
 }
 
@@ -647,30 +654,39 @@ footer strong{ color:var(--gold-light); font-weight:400; }
   pointer-events:none;
 }
 .stats-inner{
-  display:grid; grid-template-columns:1fr 1fr;
-  gap:2rem 1rem; max-width:900px; margin:0 auto;
+  display:flex; align-items:stretch;
+  max-width:900px; margin:0 auto;
   position:relative; z-index:1;
 }
-.stat-item{ text-align:center; }
+.stat-item{
+  flex:1; min-width:0; text-align:center;
+  padding:.8rem .25rem;
+  display:flex; flex-direction:column; align-items:center; justify-content:center;
+}
 .stat-num{
-  font-family:'Playfair Display',serif; font-size:clamp(2.2rem,6vw,3.4rem);
+  font-family:'Playfair Display',serif;
+  font-size:clamp(1.3rem,4vw,3.4rem);
   font-weight:400; color:var(--gold-light); line-height:1; display:block;
 }
 .stat-label{
-  font-family:'Jost',sans-serif; font-size:.6rem; font-weight:300;
-  letter-spacing:.32em; text-transform:uppercase;
-  color:rgba(200,216,197,.5); margin-top:.4rem; display:block;
+  font-family:'Jost',sans-serif;
+  font-size:clamp(.42rem,.8vw,.6rem); font-weight:300;
+  letter-spacing:.12em; text-transform:uppercase;
+  color:rgba(200,216,197,.55); margin-top:.35rem; display:block;
+  word-break:break-word; hyphens:auto;
 }
 .stat-divider{
-  display:none;
-  width:1px; background:rgba(201,160,70,.18); align-self:stretch;
+  width:1px; flex-shrink:0;
+  background:rgba(201,160,70,.18);
+  margin:.6rem 0; align-self:stretch;
 }
-@media(min-width:540px){
-  .stats-inner{ grid-template-columns:repeat(4,1fr); gap:0; }
-  .stat-divider{ display:block; }
+@media(min-width:480px){
+  .stat-item{ padding:1rem .5rem; }
+  .stat-label{ letter-spacing:.22em; }
 }
 @media(min-width:768px){
   .stats-bar{ padding:4rem 2rem; }
+  .stat-label{ letter-spacing:.32em; }
 }
 
 /* =============================================
@@ -785,30 +801,44 @@ footer strong{ color:var(--gold-light); font-weight:400; }
 .mobile-cta-bar{
   display:none;
   position:fixed; bottom:0; left:0; right:0; z-index:690;
-  background:var(--bark);
+  background:rgba(14,11,7,.96);
+  backdrop-filter:blur(18px) saturate(1.6);
+  -webkit-backdrop-filter:blur(18px) saturate(1.6);
   border-top:1px solid rgba(201,160,70,.2);
-  padding:.7rem 1rem calc(.7rem + env(safe-area-inset-bottom));
-  grid-template-columns:1fr 1fr 1fr;
-  gap:.5rem;
+}
+.mobile-cta-inner{
+  display:flex; align-items:stretch;
+  height:58px;
+  padding-bottom:env(safe-area-inset-bottom);
 }
 .mobile-cta-bar a{
-  display:flex; flex-direction:column; align-items:center; gap:.25rem;
-  font-family:'Jost',sans-serif; font-size:.52rem; font-weight:400;
-  letter-spacing:.2em; text-transform:uppercase; text-decoration:none;
-  padding:.55rem .4rem; border-radius:10px;
-  transition:background .2s;
+  flex:1; display:flex; flex-direction:column;
+  align-items:center; justify-content:center; gap:4px;
+  text-decoration:none; color:rgba(219,185,90,.8);
+  font-family:'Jost',sans-serif; font-size:9px; font-weight:300;
+  letter-spacing:.15em; text-transform:uppercase;
+  -webkit-tap-highlight-color:transparent;
+  transition:background .18s;
 }
-.mobile-cta-bar a:hover{ background:rgba(255,255,255,.06); }
-.mobile-cta-call{ color:var(--gold-light); }
-.mobile-cta-wa{ color:#4ade80; }
-.mobile-cta-visit{ color:#fff; background:rgba(201,160,70,.18) !important; border:1px solid rgba(201,160,70,.3); }
-.mobile-cta-icon{ font-size:1.15rem; line-height:1; }
+.mobile-cta-bar a:active{ background:rgba(255,255,255,.05); }
+.mobile-cta-bar a + a{
+  border-left:1px solid rgba(201,160,70,.14);
+}
+.mobile-cta-wa{ color:#4ade80 !important; }
+.mobile-cta-icon{
+  width:24px; height:24px; border-radius:50%;
+  display:flex; align-items:center; justify-content:center;
+  flex-shrink:0;
+}
+.mobile-cta-call .mobile-cta-icon{ background:rgba(201,160,70,.14); }
+.mobile-cta-wa   .mobile-cta-icon{ background:rgba(74,222,128,.12); }
+.mobile-cta-visit .mobile-cta-icon{ background:rgba(201,160,70,.1); }
+.mobile-cta-icon svg{ width:13px; height:13px; display:block; }
+.mobile-cta-label{ line-height:1; }
 
-/* show on mobile, hide on desktop */
 @media(max-width:767px){
-  .mobile-cta-bar{ display:grid; }
-  /* pad body so content isn't hidden behind bar */
-  footer{ padding-bottom:calc(4.5rem + env(safe-area-inset-bottom)); }
+  .mobile-cta-bar{ display:block; }
+  footer{ padding-bottom:calc(58px + env(safe-area-inset-bottom) + 1rem); }
 }
 
 /* =============================================
@@ -829,9 +859,10 @@ footer strong{ color:var(--gold-light); font-weight:400; }
 }
 .hero-cta-call, .hero-cta-wa{
   display:inline-flex; align-items:center; gap:.55rem;
-  font-family:'Jost',sans-serif; font-size:.72rem;
-  font-weight:400; letter-spacing:.18em; text-transform:uppercase;
-  text-decoration:none; padding:.8rem 2rem; border-radius:50px;
+  font-family:'Jost',sans-serif; font-size:clamp(.62rem,.9vw,.72rem);
+  font-weight:400; letter-spacing:.16em; text-transform:uppercase;
+  text-decoration:none; padding:.75rem clamp(1.2rem,4vw,2rem); border-radius:50px;
+  white-space:nowrap;
   transition:transform .25s, box-shadow .25s, background .25s;
 }
 .hero-cta-call{
@@ -904,6 +935,58 @@ footer strong{ color:var(--gold-light); font-weight:400; }
   background:rgba(201,160,70,.1); transform:translateY(-3px);
 }
 .social-icon svg{ width:15px; height:15px; }
+
+/* =============================================
+   SECTION GOLD DIVIDER
+============================================= */
+.section-divider{
+  height:1px; border:none; margin:0;
+  background:linear-gradient(to right, transparent, rgba(201,160,70,.28) 30%, rgba(201,160,70,.28) 70%, transparent);
+}
+
+/* =============================================
+   PREMIUM POLISH
+============================================= */
+/* Smooth anchor offset for sticky bar */
+section[id]{ scroll-margin-top:24px; }
+
+/* Gold top-edge accent on light cards */
+.offer-card::before{
+  content:''; position:absolute; top:0; left:10%; right:10%; height:2px;
+  background:linear-gradient(to right, transparent, rgba(201,160,70,.45), transparent);
+  border-radius:0 0 4px 4px; opacity:0;
+  transition:opacity .35s;
+}
+.offer-card{ position:relative; }
+.offer-card:hover::before{ opacity:1; }
+
+/* Gold accent on pillar cards */
+.pillar-card::after{
+  content:''; position:absolute; top:0; left:0; right:0; height:1px;
+  background:linear-gradient(to right, transparent, rgba(201,160,70,.3), transparent);
+  opacity:0; transition:opacity .35s;
+}
+.pillar-card:hover::after{ opacity:1; }
+
+/* Eyebrow dot ornament */
+.eyebrow{
+  position:relative; display:inline-block;
+}
+.eyebrow::before,.eyebrow::after{
+  content:'—'; margin:0 .5em; opacity:.4;
+}
+
+/* Testimonial card left-border accent */
+.testi-card{
+  border-left:3px solid transparent;
+  transition:border-color .35s, transform .35s, box-shadow .35s;
+}
+.testi-card:hover{ border-left-color:rgba(201,160,70,.45); }
+
+/* WhatsApp widget: hide on mobile since CTA bar covers it */
+@media(max-width:767px){
+  .wa-widget{ display:none; }
+}
 
 /* =============================================
    SCROLL REVEAL
@@ -1180,6 +1263,7 @@ footer strong{ color:var(--gold-light); font-weight:400; }
   </div>
 </section>
 
+<hr class="section-divider">
 <!-- TESTIMONIALS -->
 <section class="testimonials" id="testimonials">
   <div class="testimonials-inner">
@@ -1227,6 +1311,7 @@ footer strong{ color:var(--gold-light); font-weight:400; }
   </div>
 </section>
 
+<hr class="section-divider">
 <!-- OFFERINGS -->
 <section class="offerings">
   <svg class="offerings-leaf-l" color="#4a6741"><use href="#leaf"/></svg>
@@ -1299,6 +1384,7 @@ footer strong{ color:var(--gold-light); font-weight:400; }
   </div>
 </section>
 
+<hr class="section-divider">
 <!-- PILLARS -->
 <section class="pillars-section" id="values">
   <p class="eyebrow reveal-on-scroll">Our Four Foundations</p>
@@ -1328,6 +1414,7 @@ footer strong{ color:var(--gold-light); font-weight:400; }
   </div>
 </section>
 
+<hr class="section-divider">
 <!-- FAQ -->
 <section class="faq-section" id="faq">
   <div class="faq-inner">
@@ -1401,6 +1488,7 @@ footer strong{ color:var(--gold-light); font-weight:400; }
   <p class="quote-attr reveal-on-scroll">The Serene Arya Philosophy</p>
 </section>
 
+<hr class="section-divider">
 <!-- CONTACT -->
 <section class="contact-band" id="contact">
   <svg class="contact-leaf-tl" color="#c8d8c5"><use href="#leaf"/></svg>
@@ -1598,18 +1686,26 @@ document.querySelectorAll('.reveal-on-scroll').forEach(el=>obs.observe(el));
 
 <!-- STICKY MOBILE CTA BAR -->
 <div class="mobile-cta-bar" role="navigation" aria-label="Quick contact">
-  <a href="tel:+917306477745" class="mobile-cta-call">
-    <span class="mobile-cta-icon">✆</span>
-    Call
-  </a>
-  <a href="https://wa.me/917306477745" class="mobile-cta-wa" target="_blank" rel="noopener">
-    <span class="mobile-cta-icon">💬</span>
-    WhatsApp
-  </a>
-  <a href="#contact" class="mobile-cta-visit">
-    <span class="mobile-cta-icon">⌂</span>
-    Book Visit
-  </a>
+  <div class="mobile-cta-inner">
+    <a href="tel:+917306477745" class="mobile-cta-call">
+      <span class="mobile-cta-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.81a19.79 19.79 0 01-3.07-8.67A2 2 0 012 1h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L6.91 8.92a16 16 0 006.15 6.15l1.28-1.28a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+      </span>
+      <span class="mobile-cta-label">Call</span>
+    </a>
+    <a href="https://wa.me/917306477745" class="mobile-cta-wa" target="_blank" rel="noopener">
+      <span class="mobile-cta-icon">
+        <svg viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+      </span>
+      <span class="mobile-cta-label">WhatsApp</span>
+    </a>
+    <a href="#contact" class="mobile-cta-visit">
+      <span class="mobile-cta-icon">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      </span>
+      <span class="mobile-cta-label">Book Visit</span>
+    </a>
+  </div>
 </div>
 
 <!-- WHATSAPP FLOATING WIDGET -->
